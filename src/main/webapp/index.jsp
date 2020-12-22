@@ -13,6 +13,13 @@
         <title>Tareas</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-    </body>
+        
+        <div class="container-fluid">
+            
+            <%@include file="WEB-INF/vista/cabecera.jspf" %>   
+            
+        </div>
+        
+    </body>     
+ 
 </html>
