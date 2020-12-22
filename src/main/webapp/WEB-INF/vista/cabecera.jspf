@@ -1,0 +1,8 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+
+<div class="row form-group align-items-center">
+    <div class="col text-center">
+        <h1 class="font-weight-bolder">TAREAS</h1>
+    </div>
+<div>
