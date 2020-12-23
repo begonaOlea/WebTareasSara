@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class TareasService {
     
-    public static Collection<Tarea> getListaTareasPorEstado(String estado, String email){
+    public static List<Tarea> getListaTareasPorEstado(String estado, String email){
                 
         List<Tarea> listaTareasUsuario = DB.getListaTareasPorUsuario().get(email);
         

@@ -24,7 +24,7 @@ public class DB {
     
     private static List<Usuario> listaUsuarios;
     private static Map<String,List<Tarea>> listaTareasPorUsuario;
-    //private static int ultimaTarea = 0;
+    private static int ultimaTarea = 0;
     
         
     static{
@@ -68,6 +68,7 @@ public class DB {
         listaTareasPorUsuario.put("usuario2@email.com", lt2);
         listaTareasPorUsuario.put("usuario3@email.com", lt3);
         listaTareasPorUsuario.put("usuario4@email.com", lt4);
+        
         
     }
     

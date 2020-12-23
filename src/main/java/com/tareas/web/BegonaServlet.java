@@ -25,20 +25,20 @@ public class BegonaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
        
-          HttpSession s = req.getSession();
-          Usuario usr ;
-          if(s.getAttribute("usuario") == null ){
-              resp.sendRedirect("form-login.jsp");
-          }else{
-              
-              usr  = (Usuario)s.getAttribute("usuario");
-          }
-    
-          List<Tarea> listTodo = db.getListTareaPorUsuairoEstao(usr.getEmail, EStado);
-          
-          req.setAttribute("listaTodo", listTodo);
-          
-          -- hacer request dispacher
+//          HttpSession s = req.getSession();
+//          Usuario usr ;
+//          if(s.getAttribute("usuario") == null ){
+//              resp.sendRedirect("form-login.jsp");
+//          }else{
+//              
+//              usr  = (Usuario)s.getAttribute("usuario");
+//          }
+//    
+//          List<Tarea> listTodo = db.getListTareaPorUsuairoEstao(usr.getEmail, EStado);
+//          
+//          req.setAttribute("listaTodo", listTodo);
+//          
+//          -- hacer request dispacher
     
     }
 

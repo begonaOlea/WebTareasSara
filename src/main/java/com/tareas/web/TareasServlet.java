@@ -5,10 +5,13 @@
  */
 package com.tareas.web;
 
-import com.tareas.exceptions.LoginException;
-import com.tareas.services.LoginService;
+import com.tareas.model.Estado;
+import com.tareas.model.Tarea;
+import com.tareas.model.Usuario;
+import com.tareas.services.TareasService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,64 +23,40 @@ import javax.servlet.http.HttpSession;
  *
  * @author user
  */
-public class LoginServlet extends HttpServlet {
+public class TareasServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-            
-        boolean valido = true;
-        
-        
-        String msgErrorEmail = null;
-        
-        String email = req.getParameter("email");
-        if(email == null || email.trim().length() == 0){
-            msgErrorEmail = "Debe indicar el email del usuario.";
-            valido = false;
-        }
-        
-        String msgErrorPassword = null;
-
-        String password = req.getParameter("password");
-        if(password == null || password.trim().length() == 0){
-            msgErrorPassword = "Debe indicar el password del usuario.";
-            valido = false;
-        }
-
-        
-        
-        String msgErrorLogin = null;
-        if(valido){
-                HttpSession sesion = req.getSession();
-                LoginService servicio = new LoginService();
-            try {
-                servicio.login(email,password,sesion);
-            } catch (LoginException ex) {
-                msgErrorLogin = ex.getMessage();
-                valido = false;
-            }
-        }
-
-        
-        String jspAmostrar = "";
-        if (valido){
-            //jspAmostrar = "lista-tareas.jsp";
-            resp.sendRedirect("tareas");
-        }else{
-            jspAmostrar = "form-login.jsp";
-            req.setAttribute("msgErrorEmail", msgErrorEmail);
-            req.setAttribute("msgErrorPassword", msgErrorPassword);
-            req.setAttribute("msgErrorLogin", msgErrorLogin);
-            RequestDispatcher rd = req.getRequestDispatcher(jspAmostrar);
-            rd.forward(req, resp);
-        }
-        
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 
-
+        HttpSession sesion = req.getSession();
+        //COMPROBAR QUE EL USUARIO NO ES NULL
+        Usuario usr = (Usuario)sesion.getAttribute("usuario");
+        List<Tarea> listaTodo = TareasService.getListaTareasPorEstado(Estado.TODO.getValor(), usr.getEmail());
+        List<Tarea> listaInprogress = TareasService.getListaTareasPorEstado(Estado.INPROGRESS.getValor(), usr.getEmail());
+        List<Tarea> listaDone = TareasService.getListaTareasPorEstado(Estado.DONE.getValor(), usr.getEmail());
+        req.setAttribute("listaTodo", listaTodo);
+        req.setAttribute("listaInprogress", listaInprogress);
+        req.setAttribute("listaDone", listaDone);
+        RequestDispatcher rd = req.getRequestDispatcher("lista-tareas.jsp");
+        rd.forward(req, resp);
+        
+        
+//          Usuario usr ;
+//          if(s.getAttribute("usuario") == null ){
+//              resp.sendRedirect("form-login.jsp");
+//          }else{
+//              
+//              usr  = (Usuario)s.getAttribute("usuario");
+//          }
+//    
+//          List<Tarea> listTodo = db.getListTareaPorUsuairoEstao(usr.getEmail, EStado);
+//          
+//          req.setAttribute("listaTodo", listTodo);
+//          
+//          -- hacer request dispacher
+        
     }
-    
     
     
 
@@ -98,10 +77,10 @@ public class LoginServlet extends HttpServlet {
 //            out.println("<!DOCTYPE html>");
 //            out.println("<html>");
 //            out.println("<head>");
-//            out.println("<title>Servlet LoginServlet</title>");            
+//            out.println("<title>Servlet TareasServlet</title>");            
 //            out.println("</head>");
 //            out.println("<body>");
-//            out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
+//            out.println("<h1>Servlet TareasServlet at " + request.getContextPath() + "</h1>");
 //            out.println("</body>");
 //            out.println("</html>");
 //        }
