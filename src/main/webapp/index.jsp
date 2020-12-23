@@ -18,6 +18,8 @@
             
             <%@include file="WEB-INF/vista/cabecera.jspf" %>   
             
+            <h2>Organiza tus tareas.</h2>
+            
         </div>
         
     </body>     

@@ -15,7 +15,7 @@ import java.util.Objects;
 public class Usuario {
     
     //ATRIBUTOS
-    private String email;
+    private String email; //PK
     private String password;
     private String nombre;
     private String apellido;

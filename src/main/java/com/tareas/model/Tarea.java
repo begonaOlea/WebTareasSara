@@ -12,7 +12,7 @@ package com.tareas.model;
 public class Tarea {
     
     //ATRIBUTOS
-    private int idTarea;
+    private int idTarea; //PK
     private String descripcion;
     private String estado;
 
