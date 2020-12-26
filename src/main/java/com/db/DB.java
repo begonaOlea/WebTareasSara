@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tareas.db;
+package com.db;
 
 import com.tareas.exceptions.DBException;
 import com.tareas.model.Estado;
@@ -70,6 +70,8 @@ public class DB {
         listaTareasPorUsuario.put("usuario4@email.com", lt4);
         
         
+        ultimaTarea = 19;
+        
     }
     
     
@@ -85,7 +87,9 @@ public class DB {
         return listaUsuarios;
     }
 
-    
+    public static void incrementarTarea(){
+     ultimaTarea++;
+    }
     
     
     
@@ -100,7 +104,7 @@ public class DB {
 
         System.out.println("-------------------------------");
         
-        ts.modificarEstadoTarea(1, Estado.INPROGRESS.getValor(), "usuario4@email.com");
+        ts.modificarEstadoTarea(18, Estado.INPROGRESS.getValor(), "usuario4@email.com");
         System.out.println(listaTareasPorUsuario.get("usuario4@email.com"));
         System.out.println(listaTareasPorUsuario.get("usuario1@email.com"));
 
@@ -113,7 +117,8 @@ public class DB {
         System.out.println("-------------------------------");
 
         try {
-            ts.darAltaTarea(new Tarea("TareaS",Estado.TODO.getValor()), "usuario4@email.com");
+            ts.darAltaTarea(new Tarea(ultimaTarea,"TareaS",Estado.TODO.getValor()), "usuario4@email.com");
+            ts.darAltaTarea(new Tarea(ultimaTarea,"TareaT",Estado.TODO.getValor()), "usuario4@email.com");
         } catch (DBException ex) {
             System.out.println(ex.getMessage());
         }

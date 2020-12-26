@@ -5,7 +5,7 @@
  */
 package com.tareas.services;
 
-import com.tareas.db.DB;
+import com.db.DB;
 import com.tareas.exceptions.LoginException;
 import com.tareas.model.Usuario;
 import java.util.Collection;

@@ -5,7 +5,7 @@
  */
 package com.tareas.services;
 
-import com.tareas.db.DB;
+import com.db.DB;
 import com.tareas.exceptions.DBException;
 import com.tareas.model.Estado;
 import com.tareas.model.Tarea;
@@ -56,6 +56,8 @@ public class TareasService {
         boolean existe = listaTareasUsuario.add(tarea);
         if(!existe){
             throw new DBException("La tarea ya existe.");
+        }else{
+            DB.incrementarTarea();
         }
         
     }
