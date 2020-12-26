@@ -31,35 +31,59 @@
                 <div class="col">
                     <h4>TO DO</h4>
                     <table class="table">
-                <thead>
-                    <tr>
-                    <th>descripcion</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    <c:forEach var="t" items="${requestScope.listaTodo}">
-                        <td>${t.descripcion}</td>
-                    </c:forEach>
-                    </tr>
-                <tbody>
+                        <thead>
+                            <tr>
+                            <th>id</th>
+                            <th>descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="t" items="${requestScope.listaTodo}">
+                                <tr>
+                                <td>${t.idTarea}</td>
+                                <td>${t.descripcion}</td>
+                                </tr>
+                            </c:forEach>
+                        <tbody>
                     </table>
                 </div>
                 <div class="col">
                     <h4>IN PROGRESS</h4>
-                    
-                    <c:forEach var="t" items="${requestScope.listaInprogress}">
-                        <h4>${t.descripcion}</h4>
-                    </c:forEach>
-                        
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th>id</th>
+                            <th>descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="t" items="${requestScope.listaInprogress}">
+                                <tr>
+                                <td>${t.idTarea}</td>
+                                <td>${t.descripcion}</td>
+                                </tr>
+                            </c:forEach>
+                        <tbody>
+                    </table>
                 </div>
                 <div class="col">
                     <h4>DONE</h4>
-                    
-                    <c:forEach var="t" items="${requestScope.listaDone}">
-                        <h4>${t.descripcion}</h4>
-                    </c:forEach>
-                        
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th>id</th>
+                            <th>descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="t" items="${requestScope.listaDone}">
+                                <tr>
+                                <td>${t.idTarea}</td>
+                                <td>${t.descripcion}</td>
+                                </tr>
+                            </c:forEach>
+                        <tbody>
+                    </table>
                 </div>
             </div>
         
