@@ -53,8 +53,8 @@ public class TareasService {
         
         List<Tarea> listaTareasUsuario = DB.getListaTareasPorUsuario().get(email);
 
-        boolean existe = listaTareasUsuario.add(tarea);
-        if(!existe){
+        boolean added = listaTareasUsuario.add(tarea);
+        if(!added){
             throw new DBException("La tarea ya existe.");
         }else{
             DB.incrementarTarea();

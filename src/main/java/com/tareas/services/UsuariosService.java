@@ -7,7 +7,10 @@ package com.tareas.services;
 
 import com.db.DB;
 import com.tareas.exceptions.DBException;
+import com.tareas.model.Tarea;
 import com.tareas.model.Usuario;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -15,10 +18,12 @@ import com.tareas.model.Usuario;
  */
 public class UsuariosService {
     
-    public static synchronized void altaUsuario(Usuario usuario) throws DBException{
-        boolean existe = DB.getListaUsuarios().add(usuario);
-        if(!existe){
+    public static void darAltaUsuario(Usuario usuario) throws DBException{
+        boolean added = DB.getListaUsuarios().add(usuario);
+        if(!added){
             throw new DBException("El usuario ya existe.");
+        }else{
+            DB.getListaTareasPorUsuario().put(usuario.getEmail(), new ArrayList<Tarea>());
         }
     }
     
