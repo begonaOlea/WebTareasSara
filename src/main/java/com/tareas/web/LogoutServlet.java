@@ -7,7 +7,6 @@ package com.tareas.web;
 
 import com.tareas.services.LoginService;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author user
+ * @author Sara
  */
 public class LogoutServlet extends HttpServlet {
 
@@ -24,13 +23,16 @@ public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        //Se invalida la sesión.
         LoginService servicio = new LoginService();
         servicio.logout(req.getSession());
-
+        //Se va a la página de inicio.
         RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
         rd.forward(req, resp);
 
     }
+    
+    
     
     
 //    /**

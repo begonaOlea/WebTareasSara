@@ -5,8 +5,9 @@
  */
 package com.tareas.web;
 
-import com.tareas.exceptions.LoginException;
-import com.tareas.services.LoginService;
+import com.tareas.exceptions.DBException;
+import com.tareas.model.Usuario;
+import com.tareas.services.UsuariosService;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,12 +20,12 @@ import javax.servlet.http.HttpSession;
  *
  * @author Sara
  */
-public class LoginServlet extends HttpServlet {
+public class AltaUsuarioServlet extends HttpServlet {
     
-
+   
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            
+        
         boolean valido = true;
         
         String msgErrorEmail = null;
@@ -45,36 +46,61 @@ public class LoginServlet extends HttpServlet {
             valido = false;
         }
         
+        String msgErrorNombre = null;
+        //Leer el parámetro nombre.                
+        String nombre = req.getParameter("nombre");
+        //Validar el parámetro nombre.
+        if(nombre == null || nombre.trim().length() == 0){
+            msgErrorNombre = "Debe indicar el nombre del usuario.";
+            valido = false;
+        }
         
-        String msgErrorLogin = null;
-        if(valido){//Si los parámetros son correctos obtengo la sesión y hago el login. Si hay error se recoge la excepción.
-            try{
-                HttpSession sesion = req.getSession();
-                LoginService ls = new LoginService();
-                ls.login(email,password,sesion);
-            }catch (LoginException ex) {
-                msgErrorLogin = ex.getMessage();
+        String msgErrorApellido = null;
+        //Leer el parámetro apellido.                
+        String apellido = req.getParameter("apellido");
+        //Validar el parámetro apellido.
+        if(apellido == null || apellido.trim().length() == 0){
+            msgErrorApellido = "Debe indicar el apellido del usuario.";
+            valido = false;
+        }
+        
+        
+        String msgErrorAlta = null;
+        if(valido){// Si los parámetros son correctos creo el usuario, le doy de alta y añado el usuario a la sesion. Si hay error se recoge la excepción. 
+            Usuario usuario = new Usuario(email,password,nombre,apellido);
+            try {
+                UsuariosService us = new UsuariosService();
+                us.darAltaUsuario(usuario);
+
+                HttpSession session = req.getSession();
+                session.setAttribute("usuario", usuario);
+            } catch (DBException ex) {
+                msgErrorAlta = ex.getMessage();
                 valido = false;
             }
         }
         
-        String jspAmostrar = "";
-        if (valido){//Si los parámetros y el login son oorrectos se muestran las tareas.
+        
+        String jspAmostrar = "";//Si los parámetros y el alta son oorrectos se muestran las tareas.
+        if (valido){
             //jspAmostrar = "lista-tareas.jsp";
             resp.sendRedirect("tareas");
-        }else{//Si los parámetros y el login no son correctos se muestran los errores correspondientes.
+        }else{//Si los parámetros y el alta no son correctos se muestran los errores correspondientes.
+            jspAmostrar = "form-alta-usuario.jsp";
             req.setAttribute("msgErrorEmail", msgErrorEmail);
             req.setAttribute("msgErrorPassword", msgErrorPassword);
-            req.setAttribute("msgErrorLogin", msgErrorLogin);
+            req.setAttribute("msgErrorNombre", msgErrorNombre);
+            req.setAttribute("msgErrorApellido", msgErrorApellido);
+            req.setAttribute("msgErrorAlta", msgErrorAlta);
             RequestDispatcher rd = req.getRequestDispatcher(jspAmostrar);
             rd.forward(req, resp);
         }
 
     }
+        
     
     
     
-
 //    /**
 //     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
 //     * methods.
@@ -92,10 +118,10 @@ public class LoginServlet extends HttpServlet {
 //            out.println("<!DOCTYPE html>");
 //            out.println("<html>");
 //            out.println("<head>");
-//            out.println("<title>Servlet LoginServlet</title>");            
+//            out.println("<title>Servlet AltaUsuarioServlet</title>");            
 //            out.println("</head>");
 //            out.println("<body>");
-//            out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
+//            out.println("<h1>Servlet AltaUsuarioServlet at " + request.getContextPath() + "</h1>");
 //            out.println("</body>");
 //            out.println("</html>");
 //        }
