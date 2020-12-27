@@ -10,21 +10,30 @@ import com.tareas.exceptions.DBException;
 import com.tareas.model.Tarea;
 import com.tareas.model.Usuario;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
- * @author user
+ * @author Sara
  */
 public class UsuariosService {
     
+    /**
+     * Añade el usuario. Si ya estaba no se añade y lanza excepcion. Si no estaba se añade y se crea una lista de tareas vacia para este usuario.
+     * @param usuario
+     * @throws DBException 
+     */
     public static void darAltaUsuario(Usuario usuario) throws DBException{
+        
         boolean added = DB.getListaUsuarios().add(usuario);
         if(!added){
             throw new DBException("El usuario ya existe.");
         }else{
-            DB.getListaTareasPorUsuario().put(usuario.getEmail(), new ArrayList<Tarea>());
+            DB.getListaTareasPorUsuario().put(usuario.getEmail(), new HashSet<Tarea>());
         }
+        
     }
     
 }

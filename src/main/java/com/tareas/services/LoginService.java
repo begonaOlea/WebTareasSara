@@ -13,13 +13,20 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author user
+ * @author Sara
  */
 public class LoginService {
     
+    /**
+     * Comprueba si existe el usuario con el email y password indicado para añadirlo a la sesion.
+     * @param email
+     * @param password
+     * @param sesion
+     * @throws LoginException 
+     */
     public void login(String email, String password, HttpSession sesion) throws LoginException{
     
-        //DB ver si existe y coincide email y password
+        //Comprobar si el usuario existe, si hay otro usuario con el mismo email.
         Collection<Usuario> usuarios = DB.getListaUsuarios();
         Usuario usuarioEncontrado = null;
         for(Usuario u: usuarios){
@@ -29,18 +36,22 @@ public class LoginService {
             }
         }
         
-        if(usuarioEncontrado == null){//sino existe lanzo excepcion
+        if(usuarioEncontrado == null){//Si el usuario no existe se lanza excepción.
             throw new LoginException("El usuario no existe. Debe registrarse.");
-        }else{
-            if(usuarioEncontrado.getPassword().equals(password)){//ver si clave ok
-                //si existe añadir a sesion
+        }else{//Si el usuario existe...
+            if(usuarioEncontrado.getPassword().equals(password)){//Si tiene la misma contraseña se añade el usuario a la sesión.
                 sesion.setAttribute("usuario", usuarioEncontrado);
-            }else{
+            }else{//Si no tiene la misma contraseña se lanza excepción.
                 throw new LoginException("Password no valida.");
             }
         }
+        
     }
     
+    /**
+     * Invalida la sesión.
+     * @param sesion 
+     */
     public void logout(HttpSession sesion){
         sesion.invalidate();
     }

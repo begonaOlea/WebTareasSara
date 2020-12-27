@@ -11,6 +11,7 @@ import com.tareas.model.Usuario;
 import com.tareas.services.TareasService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collection;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,9 +33,9 @@ public class TareasServlet extends HttpServlet {
         HttpSession sesion = req.getSession();
         //COMPROBAR QUE EL USUARIO NO ES NULL
         Usuario usr = (Usuario)sesion.getAttribute("usuario");
-        List<Tarea> listaTodo = TareasService.getListaTareasPorEstado(Estado.TODO.getValor(), usr.getEmail());
-        List<Tarea> listaInprogress = TareasService.getListaTareasPorEstado(Estado.INPROGRESS.getValor(), usr.getEmail());
-        List<Tarea> listaDone = TareasService.getListaTareasPorEstado(Estado.DONE.getValor(), usr.getEmail());
+        Collection<Tarea> listaTodo = TareasService.getListaTareasPorEstado(Estado.TODO.getValor(), usr.getEmail());
+        Collection<Tarea> listaInprogress = TareasService.getListaTareasPorEstado(Estado.INPROGRESS.getValor(), usr.getEmail());
+        Collection<Tarea> listaDone = TareasService.getListaTareasPorEstado(Estado.DONE.getValor(), usr.getEmail());
         req.setAttribute("listaTodo", listaTodo);
         req.setAttribute("listaInprogress", listaInprogress);
         req.setAttribute("listaDone", listaDone);
