@@ -57,12 +57,12 @@ public class ModificarEstadoTareaServlet extends HttpServlet {
         }
       
         
-        String msgErrorAlta = null;
+        String msgErrorModificar = null;
         if(valido){// Si los parámetros son correctos creo la tarea y la añado al usuario de la sesion. Si hay error se recoge la excepción. 
             try{
                 HttpSession sesion = req.getSession();
                 if(sesion.getAttribute("usuario") == null){
-                    msgErrorAlta = "El usuario no está en la sesión.";
+                    msgErrorModificar = "El usuario no está en la sesión.";
                     valido = false;
                 }else{
                     Usuario usuario = (Usuario)sesion.getAttribute("usuario");
@@ -70,7 +70,7 @@ public class ModificarEstadoTareaServlet extends HttpServlet {
                     ts.modificarEstadoTarea(id, estado, usuario.getEmail());
                 }
             }catch (DBException ex) {
-                msgErrorAlta = ex.getMessage();
+                msgErrorModificar = ex.getMessage();
                 valido = false;
             }
         }
@@ -84,7 +84,7 @@ public class ModificarEstadoTareaServlet extends HttpServlet {
             jspAmostrar = "tareas";
             req.setAttribute("msgErrorId", msgErrorId);
             req.setAttribute("msgErrorEstado", msgErrorEstado);
-            req.setAttribute("msgErrorAlta", msgErrorAlta);
+            req.setAttribute("msgErrorAlta", msgErrorModificar);
             RequestDispatcher rd = req.getRequestDispatcher(jspAmostrar);
             rd.forward(req, resp);
         }

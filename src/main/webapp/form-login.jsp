@@ -9,24 +9,22 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login</title>
         <%@include file="WEB-INF/vista/bootstrap.html" %>
+        <%@include file="WEB-INF/vista/estilo.jspf" %>
+                
+        <title>Login</title>
     </head>
     <body>
         
-        <div class="container-fluid">
+        <div class="container-fluid" id="fondo">
 
             <%@include file="WEB-INF/vista/cabecera.jspf" %>
 
-            <div class="row">
-                <div class="col">
-                    <h1>Login</h1>
-                </div>
-            </div>
+            <h3>Login</h3>
             
                         
             <c:if test="${not empty requestScope.msgErrorLogin}" >
-                <div class="alert alert-warning">
+                <div class="alert alert-danger">
                     <strong>Mensaje!</strong> ${requestScope.msgErrorLogin}
                 </div>
             </c:if>
@@ -38,7 +36,7 @@
                         <span class="input-group-text">Email</span>
                     </div>
                     <input type="email" class="form-control" name="email" placeholder="Introduce email">
-                    <div class="text-warning">
+                    <div class="text-danger">
                         ${requestScope.msgErrorEmail}
                     </div>   
                 </div>
@@ -47,13 +45,13 @@
                     <span class="input-group-text">Password</span>
                     </div>
                     <input type="password" class="form-control" name="password" placeholder="Introduce password">
-                    <div class="text-warning">
+                    <div class="text-danger">
                         ${requestScope.msgErrorPassword}
                     </div>   
                 </div>
                 <div class="btn-group btn-block" role="group">
-                    <a href="form-alta-usuario.jsp" class="btn btn-warning" role="button">Registrar</a>
-                    <button type="submit" class="btn btn-warning">Login</button>
+                    <a href="form-alta-usuario.jsp" class="btn btn-info" role="button">Registrar</a>
+                    <button type="submit" class="btn btn-info">Login</button>
                 </div>
             </form>
                     

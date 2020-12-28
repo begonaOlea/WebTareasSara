@@ -11,25 +11,24 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="WEB-INF/vista/bootstrap.html" %>
+        <%@include file="WEB-INF/vista/estilo.jspf" %>
 
         <title>Alta tarea</title>
     </head>
     <body>
 
-        <div class="container-fluid">
+        <div class="container-fluid" id="fondo">
             
             <%@include file="WEB-INF/vista/cabecera.jspf" %>
 
-            <h2>Alta tarea</h2>
-            
+            <h3>Alta tarea</h3>
             
             
             <c:if test="${not empty requestScope.msgErrorAlta}" >
-                <div class="alert alert-warning">
+                <div class="alert alert-danger">
                     <strong>Mensaje!</strong> ${requestScope.msgErrorAlta}
                 </div>
             </c:if>
-                
                 
             
             <form action="alta-tarea" method="POST">
@@ -38,12 +37,12 @@
                         <span class="input-group-text">Descripción</span>
                     </div>
                     <input type="text" class="form-control" name="descripcion" placeholder="Introduce descripción">
-                    <div class="text-warning">
+                    <div class="text-danger">
                         ${requestScope.msgErrorDescripcion}
                     </div>   
                 </div>
                 
-                <input type="submit" class="btn btn-warning btn-block" value="Guardar">
+                <input type="submit" class="btn btn-info btn-block" value="Guardar">
             </form>            
                     
             <%@include file="WEB-INF/vista/pie.jspf" %>   

@@ -15,21 +15,30 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Lista tareas</title>
         <%@include file="WEB-INF/vista/bootstrap.html" %>
+        <%@include file="WEB-INF/vista/estilo.jspf" %>
 
+        <title>Lista tareas</title>
     </head>
     <body>
 
-        <div class="container-fluid">
+        <div class="container-fluid" id="fondo">
 
             <%@include file="WEB-INF/vista/cabecera.jspf" %>
         
+            <h3>Lista tareas</h3>
+            
+                        
+            <c:if test="${not empty requestScope.msgErrorModificar}" >
+                <div class="alert alert-danger">
+                    <strong>Mensaje!</strong> ${requestScope.msgErrorModificar}
+                </div>
+            </c:if>  
             
 
             <div class="row">
                 <div class="col">
-                    <h4>TO DO</h4>
+                    <h5 class="text-info">TO DO</h5>
                     <table class="table">
                         <thead>
                             <tr>
@@ -50,7 +59,7 @@
                     </table>
                 </div>
                 <div class="col">
-                    <h4>IN PROGRESS</h4>
+                    <h5 class="text-info">IN PROGRESS</h5>
                     <table class="table">
                         <thead>
                             <tr>
@@ -71,7 +80,7 @@
                     </table>
                 </div>
                 <div class="col">
-                    <h4>DONE</h4>
+                    <h5 class="text-info">DONE</h5>
                     <table class="table">
                         <thead>
                             <tr>
@@ -93,7 +102,7 @@
                 </div>
             </div>
         
-            <a href="form-alta-tarea.jsp" class="btn btn-warning btn-block" role="button">Crear tarea</a>
+            <a href="form-alta-tarea.jsp" class="btn btn-info btn-block" role="button">Crear tarea</a>
             
             <%@include file="WEB-INF/vista/pie.jspf" %>   
 

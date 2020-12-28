@@ -11,25 +11,24 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="WEB-INF/vista/bootstrap.html" %>
+        <%@include file="WEB-INF/vista/estilo.jspf" %>
 
         <title>Alta usuario</title>
     </head>
     <body>
 
-        <div class="container-fluid">
+        <div class="container-fluid" id="fondo">
             
             <%@include file="WEB-INF/vista/cabecera.jspf" %>
 
-            <h2>Alta usuario</h2>
-            
+            <h3>Alta usuario</h3>
             
             
             <c:if test="${not empty requestScope.msgErrorAlta}" >
-                <div class="alert alert-warning">
+                <div class="alert alert-danger">
                     <strong>Mensaje!</strong> ${requestScope.msgErrorAlta}
                 </div>
-            </c:if>
-                
+            </c:if>                
                 
             
             <form action="alta-usuario" method="POST">
@@ -38,7 +37,7 @@
                         <span class="input-group-text">Email</span>
                     </div>
                     <input type="email" class="form-control" name="email" placeholder="Introduce email">
-                    <div class="text-warning">
+                    <div class="text-danger">
                         ${requestScope.msgErrorEmail}
                     </div>   
                 </div>
@@ -47,7 +46,7 @@
                     <span class="input-group-text">Password</span>
                     </div>
                     <input type="password" class="form-control" name="password" placeholder="Introduce password">
-                    <div class="text-warning">
+                    <div class="text-danger">
                         ${requestScope.msgErrorPassword}
                     </div>   
                 </div>
@@ -56,7 +55,7 @@
                         <span class="input-group-text">Nombre</span>
                     </div>
                     <input type="text" class="form-control" name="nombre" placeholder="Introduce nombre">
-                    <div class="text-warning">
+                    <div class="text-danger">
                         ${requestScope.msgErrorNombre}
                     </div>   
                 </div>
@@ -65,12 +64,12 @@
                         <span class="input-group-text">Apellido</span>
                     </div>
                     <input type="text" class="form-control" name="apellido" placeholder="Introduce apellido">
-                    <div class="text-warning">
+                    <div class="text-danger">
                         ${requestScope.msgErrorApellido}
                     </div>   
                 </div>
                 
-                <input type="submit" class="btn btn-warning btn-block" value="Guardar">
+                <input type="submit" class="btn btn-info btn-block" value="Guardar">
             </form>            
 
             <%@include file="WEB-INF/vista/pie.jspf" %>   
