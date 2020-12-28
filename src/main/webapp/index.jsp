@@ -16,9 +16,17 @@
         
         <div class="container-fluid">
             
-            <%@include file="WEB-INF/vista/cabecera.jspf" %>   
+            <%@include file="WEB-INF/vista/cabecera.jspf" %>  
+
             
-            <h2>Organiza tus tareas.</h2>
+            <div class="row form-group align-items-center">
+                <div class="col text-center">
+                    <img src="resources/fondoTarea.jpg" class="img-thumbnail" alt="fondo">
+                </div>            
+            </div>            
+
+            
+            <%@include file="WEB-INF/vista/pie.jspf" %>   
             
         </div>
         

@@ -63,6 +63,7 @@ public class LoginServlet extends HttpServlet {
             //jspAmostrar = "lista-tareas.jsp";
             resp.sendRedirect("tareas");
         }else{//Si los parámetros y el login no son correctos se muestran los errores correspondientes.
+            jspAmostrar = "form-login.jsp";
             req.setAttribute("msgErrorEmail", msgErrorEmail);
             req.setAttribute("msgErrorPassword", msgErrorPassword);
             req.setAttribute("msgErrorLogin", msgErrorLogin);

@@ -89,6 +89,8 @@
         
             <a href="form-alta-tarea.jsp" class="btn btn-warning btn-block" role="button">Crear tarea</a>
             
+            <%@include file="WEB-INF/vista/pie.jspf" %>   
+
         </div>
             
     </body>

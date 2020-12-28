@@ -73,6 +73,8 @@
                 <input type="submit" class="btn btn-warning btn-block" value="Guardar">
             </form>            
 
+            <%@include file="WEB-INF/vista/pie.jspf" %>   
+
         </div>
 
     </body>

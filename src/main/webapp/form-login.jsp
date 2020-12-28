@@ -56,6 +56,8 @@
                     <button type="submit" class="btn btn-warning">Login</button>
                 </div>
             </form>
+                    
+            <%@include file="WEB-INF/vista/pie.jspf" %>   
 
         </div>
 

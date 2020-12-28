@@ -6,6 +6,7 @@
 <header>
 <div class="row form-group align-items-center">
     <div class="col text-rigt">
+        <img src="resources/logoTarea.jpg" class="rounded-circle" alt="logo">
     </div>
     <div class="col text-center">
         <h1 class="font-weight-bolder">TAREAS</h1>
