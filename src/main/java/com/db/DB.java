@@ -102,6 +102,17 @@ public class DB {
     }
 
     /**
+     * Crea una tarea con el id de la última tarea.
+     * @param descripcion
+     * @param estado
+     * @return tarea
+     */
+    public static Tarea crearTarea(String descripcion,String estado){
+        Tarea tarea = new Tarea(ultimaTarea,descripcion,estado);
+        return tarea;
+    }
+    
+    /**
      * Incrementa el numero de tareas para usarlo como id.
      */
     public static void incrementarNumeroTareas(){
