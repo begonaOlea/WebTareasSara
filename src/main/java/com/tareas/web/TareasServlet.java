@@ -29,18 +29,25 @@ public class TareasServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
+        //Obtengo el usuario de la sesión.
         HttpSession sesion = req.getSession();
-        //COMPROBAR QUE EL USUARIO NO ES NULL
-        Usuario usr = (Usuario)sesion.getAttribute("usuario");
-        Collection<Tarea> listaTodo = TareasService.getListaTareasPorEstado(Estado.TODO.getValor(), usr.getEmail());
-        Collection<Tarea> listaInprogress = TareasService.getListaTareasPorEstado(Estado.INPROGRESS.getValor(), usr.getEmail());
-        Collection<Tarea> listaDone = TareasService.getListaTareasPorEstado(Estado.DONE.getValor(), usr.getEmail());
-        req.setAttribute("listaTodo", listaTodo);
-        req.setAttribute("listaInprogress", listaInprogress);
-        req.setAttribute("listaDone", listaDone);
-        RequestDispatcher rd = req.getRequestDispatcher("lista-tareas.jsp");
-        rd.forward(req, resp);
+        
+        String jspAmostrar = "";
+        if(sesion.getAttribute("usuario") == null){
+            //jspAmostrar = "form-login.jsp";
+            resp.sendRedirect("form-login.jsp");
+        }else{
+            jspAmostrar = "lista-tareas.jsp";
+            Usuario usuario = (Usuario)sesion.getAttribute("usuario");
+            Collection<Tarea> listaTodo = TareasService.getListaTareasPorEstado(Estado.TODO.getValor(), usuario.getEmail());
+            Collection<Tarea> listaInprogress = TareasService.getListaTareasPorEstado(Estado.INPROGRESS.getValor(), usuario.getEmail());
+            Collection<Tarea> listaDone = TareasService.getListaTareasPorEstado(Estado.DONE.getValor(), usuario.getEmail());
+            req.setAttribute("listaTodo", listaTodo);
+            req.setAttribute("listaInprogress", listaInprogress);
+            req.setAttribute("listaDone", listaDone);
+            RequestDispatcher rd = req.getRequestDispatcher(jspAmostrar);
+            rd.forward(req, resp);
+        }
         
         
 //          Usuario usr ;
