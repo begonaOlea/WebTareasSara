@@ -45,7 +45,7 @@ public class TareasService {
      * @param nuevoEstado
      * @param email 
      */
-    public static void modificarEstadoTarea(int idTarea, String nuevoEstado, String email){
+    public static void modificarEstadoTarea(int idTarea, String nuevoEstado, String email) throws DBException{
         
         Collection<Tarea> listaTareasUsuario = DB.getListaTareasPorUsuario().get(email);
         
@@ -57,7 +57,11 @@ public class TareasService {
             }
         }
         
-        tarea.setEstado(nuevoEstado);
+        if (tarea == null){
+            throw new DBException("La tarea con id " + idTarea + " no existe.");
+        }else{
+            tarea.setEstado(nuevoEstado);
+        }
         
     }
     

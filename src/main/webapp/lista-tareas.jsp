@@ -43,7 +43,7 @@
                                 <tr>
                                 <td>${t.idTarea}</td>
                                 <td>${t.descripcion}</td>
-                                <td><a href="modificar-estado-tarea">InProgress</a></td>
+                                <td><a href="modificar-estado-tarea?id=${t.idTarea}&estado=<%= Estado.INPROGRESS.getValor()%>">InProgress</a></td>
                                 </tr>
                             </c:forEach>
                         <tbody>
@@ -64,7 +64,7 @@
                                 <tr>
                                 <td>${t.idTarea}</td>
                                 <td>${t.descripcion}</td>
-                                <td><a href="modificar-estado-tarea">ToDo</a><a href="modificar-estado-tarea">Done</a></td>
+                                <td><a href="modificar-estado-tarea?id=${t.idTarea}&estado=<%= Estado.TODO.getValor()%>">ToDo</a> - <a href="modificar-estado-tarea?id=${t.idTarea}&estado=<%= Estado.DONE.getValor()%>">Done</a></td>
                                 </tr>
                             </c:forEach>
                         <tbody>
@@ -85,7 +85,7 @@
                                 <tr>
                                 <td>${t.idTarea}</td>
                                 <td>${t.descripcion}</td>
-                                <td><a href="modificar-estado-tarea">InProgress</a></td>
+                                <td><a href="modificar-estado-tarea?id=${t.idTarea}&estado=<%= Estado.INPROGRESS.getValor()%>">InProgress</a></td>
                                 </tr>
                             </c:forEach>
                         <tbody>
