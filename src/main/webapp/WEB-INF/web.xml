@@ -16,6 +16,14 @@
         <servlet-name>AltaUsuarioServlett</servlet-name>
         <servlet-class>com.tareas.web.AltaUsuarioServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AltaTareaServlett</servlet-name>
+        <servlet-class>com.tareas.web.AltaTareaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ModificarEstadoTareaServlett</servlet-name>
+        <servlet-class>com.tareas.web.ModificarEstadoTareaServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlett</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -31,6 +39,14 @@
     <servlet-mapping>
         <servlet-name>AltaUsuarioServlett</servlet-name>
         <url-pattern>/alta-usuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AltaTareaServlett</servlet-name>
+        <url-pattern>/alta-tarea</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ModificarEstadoTareaServlett</servlet-name>
+        <url-pattern>/modificar-estado-tarea</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

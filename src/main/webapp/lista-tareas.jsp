@@ -35,6 +35,7 @@
                             <tr>
                             <th>id</th>
                             <th>descripción</th>
+                            <th>mover</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,6 +43,7 @@
                                 <tr>
                                 <td>${t.idTarea}</td>
                                 <td>${t.descripcion}</td>
+                                <td><a href="modificar-estado-tarea">InProgress</a></td>
                                 </tr>
                             </c:forEach>
                         <tbody>
@@ -54,6 +56,7 @@
                             <tr>
                             <th>id</th>
                             <th>descripción</th>
+                            <th>mover</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -61,6 +64,7 @@
                                 <tr>
                                 <td>${t.idTarea}</td>
                                 <td>${t.descripcion}</td>
+                                <td><a href="modificar-estado-tarea">ToDo</a><a href="modificar-estado-tarea">Done</a></td>
                                 </tr>
                             </c:forEach>
                         <tbody>
@@ -73,6 +77,7 @@
                             <tr>
                             <th>id</th>
                             <th>descripción</th>
+                            <th>mover</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -80,6 +85,7 @@
                                 <tr>
                                 <td>${t.idTarea}</td>
                                 <td>${t.descripcion}</td>
+                                <td><a href="modificar-estado-tarea">InProgress</a></td>
                                 </tr>
                             </c:forEach>
                         <tbody>
