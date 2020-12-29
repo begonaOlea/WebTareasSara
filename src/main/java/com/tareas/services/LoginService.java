@@ -27,7 +27,7 @@ public class LoginService {
     public void login(String email, String password, HttpSession sesion) throws LoginException{
     
         //Comprobar si el usuario existe, si hay otro usuario con el mismo email.
-        Collection<Usuario> usuarios = DB.getListaUsuarios();
+        Collection<Usuario> usuarios = DB.getUsuarios();
         Usuario usuarioEncontrado = null;
         for(Usuario u: usuarios){
             if(u.getEmail().equals(email)){

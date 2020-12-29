@@ -24,19 +24,19 @@ import java.util.Set;
 public class DB {
     
     //ATRIBUTOS
-    private static Set<Usuario> listaUsuarios; // Uso Set<Usuario> y no List<Usuario> para que no haya duplicados.
-    private static Map<String,Set<Tarea>> listaTareasPorUsuario; // Uso Set<Tarea> y no List<Tarea> para que no haya duplicados.
+    private static Set<Usuario> usuarios; // Uso Set<Usuario> y no List<Usuario> para que no haya duplicados.
+    private static Map<String,Set<Tarea>> tareasPorUsuario; // Uso Set<Tarea> y no List<Tarea> para que no haya duplicados.
     private static int ultimaTarea = 0; // Parar ir incrementando el idTarea automáticamente.
     
         
     //BLOQUE ESTÁTICO
     static{
         
-        listaUsuarios = new HashSet<Usuario>();
-        listaUsuarios.add(new Usuario("usuario1@email.com","111111","Nombre1","Apellido1"));
-        listaUsuarios.add(new Usuario("usuario2@email.com","222222","Nombre2","Apellido2"));
-        listaUsuarios.add(new Usuario("usuario3@email.com","333333","Nombre3","Apellido3"));
-        listaUsuarios.add(new Usuario("usuario4@email.com","444444","Nombre4","Apellido4"));
+        usuarios = new HashSet<Usuario>();
+        usuarios.add(new Usuario("usuario1@email.com","111111","Nombre1","Apellido1"));
+        usuarios.add(new Usuario("usuario2@email.com","222222","Nombre2","Apellido2"));
+        usuarios.add(new Usuario("usuario3@email.com","333333","Nombre3","Apellido3"));
+        usuarios.add(new Usuario("usuario4@email.com","444444","Nombre4","Apellido4"));
 
         
         Set<Tarea> lt1 = new HashSet<Tarea>();
@@ -66,11 +66,11 @@ public class DB {
         lt4.add(new Tarea(18,"Tarea R",Estado.DONE.getValor()));
         
         
-        listaTareasPorUsuario = new HashMap<String,Set<Tarea>>();
-        listaTareasPorUsuario.put("usuario1@email.com", lt1);
-        listaTareasPorUsuario.put("usuario2@email.com", lt2);
-        listaTareasPorUsuario.put("usuario3@email.com", lt3);
-        listaTareasPorUsuario.put("usuario4@email.com", lt4);
+        tareasPorUsuario = new HashMap<String,Set<Tarea>>();
+        tareasPorUsuario.put("usuario1@email.com", lt1);
+        tareasPorUsuario.put("usuario2@email.com", lt2);
+        tareasPorUsuario.put("usuario3@email.com", lt3);
+        tareasPorUsuario.put("usuario4@email.com", lt4);
         
         
         ultimaTarea = 19;
@@ -89,16 +89,16 @@ public class DB {
      * Obtiene la lista de tareas agrupadas por usuario.
      * @return listaTareasPorUsuario
      */
-    public static Map<String,Set<Tarea>> getListaTareasPorUsuario(){
-        return listaTareasPorUsuario;
+    public static Map<String,Set<Tarea>> getTareasPorUsuario(){
+        return tareasPorUsuario;
     }
     
     /**
      * Obtiene la lista de usuarios.
      * @return listaUsuarios
      */
-    public static Collection<Usuario> getListaUsuarios(){
-        return listaUsuarios;
+    public static Collection<Usuario> getUsuarios(){
+        return usuarios;
     }
 
     /**
@@ -116,7 +116,7 @@ public class DB {
      * Incrementa el numero de tareas para usarlo como id.
      */
     public static void incrementarNumeroTareas(){
-     ultimaTarea++;
+        ultimaTarea++;
     }
     
     
@@ -132,57 +132,58 @@ public class DB {
         System.out.println("-------------------------------");
         
         System.out.println("* PRUEBA getListaTareasPorEstado *");
-        for(Usuario u: listaUsuarios){
+        for(Usuario u: usuarios){
             System.out.println("USUARIO: " + u.getEmail());
             System.out.println("Tareas TO DO");
-            System.out.println(ts.getListaTareasPorEstado(Estado.TODO.getValor(), u.getEmail()));
+            System.out.println(ts.getTareasPorEstado(Estado.TODO.getValor(), u.getEmail()));
             System.out.println("Tareas IN PROGRESS");
-            System.out.println(ts.getListaTareasPorEstado(Estado.INPROGRESS.getValor(), u.getEmail()));
+            System.out.println(ts.getTareasPorEstado(Estado.INPROGRESS.getValor(), u.getEmail()));
             System.out.println("Tareas DONE");
-            System.out.println(ts.getListaTareasPorEstado(Estado.DONE.getValor(), u.getEmail()));
+            System.out.println(ts.getTareasPorEstado(Estado.DONE.getValor(), u.getEmail()));
         }
         
         System.out.println("-------------------------------");
         
         System.out.println("* PRUEBA modificarEstadoTarea *");
-        for(Usuario u: listaUsuarios){
+        for(Usuario u: usuarios){
             System.out.println("USUARIO: " + u.getEmail());
-            Set<Tarea> lt = listaTareasPorUsuario.get(u.getEmail()); 
+            Set<Tarea> lt = tareasPorUsuario.get(u.getEmail()); 
             Tarea t = lt.iterator().next();
-            System.out.println(t.toString());
-            System.out.println("TO DO > IN PROGRESS");    
-            ts.modificarEstadoTarea(t.getIdTarea(), Estado.INPROGRESS.getValor(), u.getEmail());    
-            System.out.println(t.toString());
-            System.out.println("IN PROGRESS > DONE");    
-            ts.modificarEstadoTarea(t.getIdTarea(), Estado.DONE.getValor(), u.getEmail());   
-            System.out.println(t.toString());
-            System.out.println("DONE > IN PROGRESS");    
-            ts.modificarEstadoTarea(t.getIdTarea(), Estado.INPROGRESS.getValor(), u.getEmail());   
-            System.out.println(t.toString());
-            System.out.println("IN PROGRESS > TO DO");    
-            ts.modificarEstadoTarea(t.getIdTarea(), Estado.TODO.getValor(), u.getEmail()); 
-            System.out.println(t.toString());
+            try { 
+                System.out.println(t.toString());
+                System.out.println("TO DO > IN PROGRESS");    
+                ts.modificarEstadoTarea(t.getIdTarea(), Estado.INPROGRESS.getValor(), u.getEmail());    
+                System.out.println(t.toString());
+                System.out.println("IN PROGRESS > DONE");    
+                ts.modificarEstadoTarea(t.getIdTarea(), Estado.DONE.getValor(), u.getEmail());   
+                System.out.println(t.toString());
+                System.out.println("DONE > IN PROGRESS");    
+                ts.modificarEstadoTarea(t.getIdTarea(), Estado.INPROGRESS.getValor(), u.getEmail());   
+                System.out.println(t.toString());
+                System.out.println("IN PROGRESS > TO DO");    
+                ts.modificarEstadoTarea(t.getIdTarea(), Estado.TODO.getValor(), u.getEmail());
+                System.out.println(t.toString());
+            } catch (DBException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
  
         System.out.println("-------------------------------");
 
         System.out.println("* PRUEBA darAltaTarea *");
-        for(Usuario u: listaUsuarios){
+        for(Usuario u: usuarios){
             System.out.println("USUARIO: " + u.getEmail());
             try {
                 System.out.println("Añado tarea TareaAA");
-                ts.darAltaTarea(new Tarea(ultimaTarea,"TareaAA",Estado.TODO.getValor()), u.getEmail());
+                ts.darAltaTarea("TareaAA", u.getEmail());
                 System.out.println("Añado tarea TareaBB");
-                ts.darAltaTarea(new Tarea(ultimaTarea,"TareaBB",Estado.TODO.getValor()), u.getEmail());
-                System.out.println("Añado tarea TareaCC");
-                Tarea tAUX = new Tarea(ultimaTarea,"TareaCC",Estado.TODO.getValor());
-                ts.darAltaTarea(tAUX, u.getEmail());
-                 System.out.println("Añado tarea TareaCC que ya existe");
-                ts.darAltaTarea(tAUX, u.getEmail());
+                ts.darAltaTarea("TareaBB", u.getEmail());
+                System.out.println("Añado tarea TareaBB que ya existe (pero el id va a ser diferente)");
+                ts.darAltaTarea("TareaBB", u.getEmail());
             } catch (DBException ex) {
                 System.out.println(ex.getMessage());
             }
-            System.out.println("Tareas TO DO: " + ts.getListaTareasPorEstado(Estado.TODO.getValor(), u.getEmail()));
+            System.out.println("Tareas TO DO: " + ts.getTareasPorEstado(Estado.TODO.getValor(), u.getEmail()));
             
         }
         
@@ -204,8 +205,8 @@ public class DB {
         } catch (DBException ex) {
             System.out.println(ex.getMessage());
         }
-        System.out.println("LISTA USUARIOS: " + listaUsuarios);
-        System.out.println("LISTA TAREAS POR USUARIO: " + listaTareasPorUsuario);
+        System.out.println("LISTA USUARIOS: " + usuarios);
+        System.out.println("LISTA TAREAS POR USUARIO: " + tareasPorUsuario);
 
     }
     

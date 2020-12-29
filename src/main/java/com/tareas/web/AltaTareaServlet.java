@@ -44,7 +44,6 @@ public class AltaTareaServlet extends HttpServlet {
         
         String msgErrorAlta = null;
         if(valido){// Si los parámetros son correctos creo la tarea y la añado al usuario de la sesion. Si hay error se recoge la excepción. 
-            Tarea tarea = DB.crearTarea(descripcion, Estado.TODO.getValor());
             try{
                 HttpSession sesion = req.getSession();
                 if(sesion.getAttribute("usuario") == null){
@@ -53,7 +52,7 @@ public class AltaTareaServlet extends HttpServlet {
                 }else{
                     Usuario usuario = (Usuario)sesion.getAttribute("usuario");
                     TareasService ts = new TareasService();
-                    ts.darAltaTarea(tarea, usuario.getEmail());
+                    ts.darAltaTarea(descripcion, usuario.getEmail());
                 }
             }catch (DBException ex) {
                 msgErrorAlta = ex.getMessage();

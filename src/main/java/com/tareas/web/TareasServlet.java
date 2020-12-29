@@ -39,9 +39,9 @@ public class TareasServlet extends HttpServlet {
         }else{
             jspAmostrar = "lista-tareas.jsp";
             Usuario usuario = (Usuario)sesion.getAttribute("usuario");
-            Collection<Tarea> listaTodo = TareasService.getListaTareasPorEstado(Estado.TODO.getValor(), usuario.getEmail());
-            Collection<Tarea> listaInprogress = TareasService.getListaTareasPorEstado(Estado.INPROGRESS.getValor(), usuario.getEmail());
-            Collection<Tarea> listaDone = TareasService.getListaTareasPorEstado(Estado.DONE.getValor(), usuario.getEmail());
+            Collection<Tarea> listaTodo = TareasService.getTareasPorEstado(Estado.TODO.getValor(), usuario.getEmail());
+            Collection<Tarea> listaInprogress = TareasService.getTareasPorEstado(Estado.INPROGRESS.getValor(), usuario.getEmail());
+            Collection<Tarea> listaDone = TareasService.getTareasPorEstado(Estado.DONE.getValor(), usuario.getEmail());
             req.setAttribute("listaTodo", listaTodo);
             req.setAttribute("listaInprogress", listaInprogress);
             req.setAttribute("listaDone", listaDone);

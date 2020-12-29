@@ -7,7 +7,7 @@ package com.tareas.model;
 
 /**
  *
- * @author user
+ * @author Sara
  */
 public enum Estado {
     

@@ -7,6 +7,7 @@ package com.tareas.services;
 
 import com.db.DB;
 import com.tareas.exceptions.DBException;
+import com.tareas.model.Estado;
 import com.tareas.model.Tarea;
 import java.util.Collection;
 import java.util.HashSet;
@@ -19,38 +20,38 @@ import java.util.Set;
 public class TareasService {
     
     /**
-     * Obtiene las tareas del usuario indicado en el email y devuelve las que corresponden al estado indicado.
+     * Obtiene todas las tareas del usuario indicado en el email y devuelve las que corresponden al estado indicado.
      * @param estado
      * @param email
-     * @return listaTareasUsuarioEstado
+     * @return tareasUsuarioEstado
      */
-    public static Collection<Tarea> getListaTareasPorEstado(String estado, String email){
+    public static Collection<Tarea> getTareasPorEstado(String estado, String email){
                 
-        Collection<Tarea> listaTareasUsuario = DB.getListaTareasPorUsuario().get(email);
+        Collection<Tarea> tareasUsuario = DB.getTareasPorUsuario().get(email);
         
-        Set<Tarea> listaTareasUsuarioEstado = new HashSet<Tarea>();
-        for(Tarea t: listaTareasUsuario){
+        Set<Tarea> tareasUsuarioEstado = new HashSet<Tarea>();
+        for(Tarea t: tareasUsuario){
             if(t.getEstado().equals(estado)){
-                listaTareasUsuarioEstado.add(t);
+                tareasUsuarioEstado.add(t);
             }
         }
         
-        return listaTareasUsuarioEstado;
+        return tareasUsuarioEstado;
     
     }
     
     /**
-     * Obtiene las tareas del usuario indicado en el email, busca la tarea con idTarea y sustituye el estado por nuevoEstado.
+     * Obtiene todas las tareas del usuario indicado en el email, busca la tarea con idTarea y sustituye el estado por nuevoEstado. Si no encuentra la tarea con ese id no la modifica y lanza excepción.
      * @param idTarea
      * @param nuevoEstado
      * @param email 
      */
     public static void modificarEstadoTarea(int idTarea, String nuevoEstado, String email) throws DBException{
         
-        Collection<Tarea> listaTareasUsuario = DB.getListaTareasPorUsuario().get(email);
+        Collection<Tarea> tareasUsuario = DB.getTareasPorUsuario().get(email);
         
         Tarea tarea = null;
-        for(Tarea t: listaTareasUsuario){
+        for(Tarea t: tareasUsuario){
             if(t.getIdTarea() == idTarea){
                 tarea=t;
                 break;
@@ -71,11 +72,13 @@ public class TareasService {
      * @param email
      * @throws DBException 
      */
-    public static void darAltaTarea(Tarea tarea, String email) throws DBException{
+    public static void darAltaTarea(String descripcion, String email) throws DBException{
         
-        Collection<Tarea> listaTareasUsuario = DB.getListaTareasPorUsuario().get(email);
+        Collection<Tarea> tareasUsuario = DB.getTareasPorUsuario().get(email);
 
-        boolean added = listaTareasUsuario.add(tarea);
+        Tarea tarea = DB.crearTarea(descripcion, Estado.TODO.getValor());
+        
+        boolean added = tareasUsuario.add(tarea);
         if(!added){
             throw new DBException("La tarea ya existe.");
         }else{

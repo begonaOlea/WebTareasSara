@@ -5,12 +5,11 @@
  */
 package com.tareas.model;
 
-import java.io.Serializable;
 import java.util.Objects;
 
 /**
  *
- * @author user
+ * @author Sara
  */
 public class Usuario {
     
