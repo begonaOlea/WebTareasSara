@@ -1,7 +1,7 @@
 <%-- 
     Document   : lista-tareas
-    Created on : 23-dic-2020, 11:16:28
-    Author     : user
+    Created on : 23-dic-2020, 10:30:00
+    Author     : Sara
 --%>
 
 <%@page import="com.tareas.model.Estado"%>
@@ -28,7 +28,13 @@
         
             <h3>Lista tareas</h3>
             
-                        
+              
+            <c:if test="${not empty requestScope.msgErrorUsuario}" >
+                <div class="alert alert-danger">
+                    <strong>Mensaje!</strong> ${requestScope.msgErrorUsuario}
+                </div>
+            </c:if>
+            
             <c:if test="${not empty requestScope.msgErrorModificar}" >
                 <div class="alert alert-danger">
                     <strong>Mensaje!</strong> ${requestScope.msgErrorModificar}
@@ -37,8 +43,11 @@
             
 
             <div class="row">
+                
                 <div class="col">
+                    
                     <h5 class="text-info">TO DO</h5>
+                    
                     <table class="table">
                         <thead>
                             <tr>
@@ -57,9 +66,13 @@
                             </c:forEach>
                         <tbody>
                     </table>
+                    
                 </div>
+                
                 <div class="col">
+                    
                     <h5 class="text-info">IN PROGRESS</h5>
+                    
                     <table class="table">
                         <thead>
                             <tr>
@@ -78,9 +91,13 @@
                             </c:forEach>
                         <tbody>
                     </table>
+                    
                 </div>
+                
                 <div class="col">
+                    
                     <h5 class="text-info">DONE</h5>
+                    
                     <table class="table">
                         <thead>
                             <tr>
@@ -99,8 +116,17 @@
                             </c:forEach>
                         <tbody>
                     </table>
-                </div>
+                    
+                </div>  
+                            
             </div>
+            
+                <div class="text-danger">
+                    ${requestScope.msgErrorId}
+                </div>  
+                <div class="text-danger">
+                    ${requestScope.msgErrorEstado}
+                </div>
         
             <a href="form-alta-tarea.jsp" class="btn btn-info btn-block" role="button">Crear tarea</a>
             

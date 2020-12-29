@@ -7,7 +7,7 @@ package com.tareas.exceptions;
 
 /**
  *
- * @author user
+ * @author Sara
  */
 public class DBException extends Exception{
 

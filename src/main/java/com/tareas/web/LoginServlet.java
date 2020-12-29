@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
         
         
         String msgErrorLogin = null;
-        if(valido){//Si los parámetros son correctos obtengo la sesión y hago el login. Si hay error se recoge la excepción.
+        if(valido){//Si los parámetros son correctos obtengo la sesión y hago el login. Si hay error (email no existe o contraseña incorrecta) se recoge la excepción.
             try{
                 HttpSession sesion = req.getSession();
                 LoginService ls = new LoginService();

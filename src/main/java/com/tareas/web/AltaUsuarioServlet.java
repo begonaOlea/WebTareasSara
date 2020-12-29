@@ -66,7 +66,7 @@ public class AltaUsuarioServlet extends HttpServlet {
         
         
         String msgErrorAlta = null;
-        if(valido){// Si los parámetros son correctos creo el usuario, le doy de alta y añado el usuario a la sesion. Si hay error se recoge la excepción. 
+        if(valido){// Si los parámetros son correctos creo el usuario, le doy de alta y añado el usuario a la sesion. Si hay error (el usuario ya existe) se recoge la excepción. 
             Usuario usuario = new Usuario(email,password,nombre,apellido);
             try {
                 UsuariosService us = new UsuariosService();

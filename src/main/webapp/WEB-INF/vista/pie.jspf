@@ -2,11 +2,13 @@
 <%@ page pageEncoding="UTF-8" %>
 
 <footer>
-    <div class="row form-group align-items-center">
+    
+<div class="row form-group align-items-center">
     <div class="col text-center">
         <h6> </h6>
         <h6><small> <i>Sara Santiso González</i> </small></h6>
         <h6> </h6>
     </div>
 </div>
+    
 </footer>

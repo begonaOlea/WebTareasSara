@@ -5,15 +5,10 @@
  */
 package com.tareas.web;
 
-import com.db.DB;
 import com.tareas.exceptions.DBException;
-import com.tareas.model.Estado;
-import com.tareas.model.Tarea;
 import com.tareas.model.Usuario;
 import com.tareas.services.TareasService;
-import com.tareas.services.UsuariosService;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -42,14 +37,15 @@ public class AltaTareaServlet extends HttpServlet {
         }
         
         
+        String msgErrorUsuario = null;
         String msgErrorAlta = null;
-        if(valido){// Si los parámetros son correctos creo la tarea y la añado al usuario de la sesion. Si hay error se recoge la excepción. 
+        if(valido){// Si los parámetros son correctos... Si hay error (la tarea ya existe) se recoge la excepción. 
             try{
                 HttpSession sesion = req.getSession();
-                if(sesion.getAttribute("usuario") == null){
-                    msgErrorAlta = "El usuario no está en la sesión.";
+                if(sesion.getAttribute("usuario") == null){//Si el usuario no ha iniciado la sesión se crea mensaje de error.
+                    msgErrorUsuario = "El usuario no ha iniciado sesión.";
                     valido = false;
-                }else{
+                }else{//Si el usuario ha iniciado sesión se da de alta la tarea para ese usuario.
                     Usuario usuario = (Usuario)sesion.getAttribute("usuario");
                     TareasService ts = new TareasService();
                     ts.darAltaTarea(descripcion, usuario.getEmail());
@@ -68,6 +64,7 @@ public class AltaTareaServlet extends HttpServlet {
         }else{//Si los parámetros y el alta no son correctos se muestran los errores correspondientes.
             jspAmostrar = "form-alta-tarea.jsp";
             req.setAttribute("msgErrorDescripcion", msgErrorDescripcion);
+            req.setAttribute("msgErrorUsuario", msgErrorUsuario);
             req.setAttribute("msgErrorAlta", msgErrorAlta);
             RequestDispatcher rd = req.getRequestDispatcher(jspAmostrar);
             rd.forward(req, resp);

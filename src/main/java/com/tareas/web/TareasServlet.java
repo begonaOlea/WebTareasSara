@@ -10,9 +10,7 @@ import com.tareas.model.Tarea;
 import com.tareas.model.Usuario;
 import com.tareas.services.TareasService;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Collection;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +20,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author user
+ * @author Sara
  */
 public class TareasServlet extends HttpServlet {
 
@@ -32,6 +30,29 @@ public class TareasServlet extends HttpServlet {
         //Obtengo el usuario de la sesión.
         HttpSession sesion = req.getSession();
         
+        String jspAmostrar = "";
+        if(sesion.getAttribute("usuario") == null){
+            //jspAmostrar = "form-login.jsp";
+            //resp.sendRedirect("form-login.jsp");
+            String msgErrorUsuario = "El usuario no ha iniciado sesión.";
+            jspAmostrar = "lista-tareas.jsp";
+            req.setAttribute("msgErrorUsuario", msgErrorUsuario);
+        }else{
+            jspAmostrar = "lista-tareas.jsp";
+            Usuario usuario = (Usuario)sesion.getAttribute("usuario");
+            Collection<Tarea> listaTodo = TareasService.getTareasPorEstado(Estado.TODO.getValor(), usuario.getEmail());
+            Collection<Tarea> listaInprogress = TareasService.getTareasPorEstado(Estado.INPROGRESS.getValor(), usuario.getEmail());
+            Collection<Tarea> listaDone = TareasService.getTareasPorEstado(Estado.DONE.getValor(), usuario.getEmail());
+            req.setAttribute("listaTodo", listaTodo);
+            req.setAttribute("listaInprogress", listaInprogress);
+            req.setAttribute("listaDone", listaDone);
+        }
+                    
+        RequestDispatcher rd = req.getRequestDispatcher(jspAmostrar);
+        rd.forward(req, resp);
+            
+            
+        /*
         String jspAmostrar = "";
         if(sesion.getAttribute("usuario") == null){
             //jspAmostrar = "form-login.jsp";
@@ -48,21 +69,7 @@ public class TareasServlet extends HttpServlet {
             RequestDispatcher rd = req.getRequestDispatcher(jspAmostrar);
             rd.forward(req, resp);
         }
-        
-        
-//          Usuario usr ;
-//          if(s.getAttribute("usuario") == null ){
-//              resp.sendRedirect("form-login.jsp");
-//          }else{
-//              
-//              usr  = (Usuario)s.getAttribute("usuario");
-//          }
-//    
-//          List<Tarea> listTodo = db.getListTareaPorUsuairoEstao(usr.getEmail, EStado);
-//          
-//          req.setAttribute("listaTodo", listTodo);
-//          
-//          -- hacer request dispacher
+        */        
         
     }
     

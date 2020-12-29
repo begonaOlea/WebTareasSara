@@ -1,7 +1,7 @@
 <%-- 
     Document   : form-login
-    Created on : 23-dic-2020, 10:48:07
-    Author     : user
+    Created on : 23-dic-2020, 10:30:00
+    Author     : Sara
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -31,6 +31,7 @@
             
             
             <form action="login" method="POST">
+                
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Email</span>
@@ -40,6 +41,7 @@
                         ${requestScope.msgErrorEmail}
                     </div>   
                 </div>
+                    
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                     <span class="input-group-text">Password</span>
@@ -49,10 +51,12 @@
                         ${requestScope.msgErrorPassword}
                     </div>   
                 </div>
+                    
                 <div class="btn-group btn-block" role="group">
                     <a href="form-alta-usuario.jsp" class="btn btn-info" role="button">Registrar</a>
                     <button type="submit" class="btn btn-info">Login</button>
                 </div>
+                    
             </form>
                     
             <%@include file="WEB-INF/vista/pie.jspf" %>   

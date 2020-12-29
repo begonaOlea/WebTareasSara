@@ -1,7 +1,7 @@
 <%-- 
-    Document   : form-alta-libro
-    Created on : 18-dic-2020, 9:31:23
-    Author     : user
+    Document   : form-alta-tarea
+    Created on : 23-dic-2020, 10:30:00
+    Author     : Sara
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -24,6 +24,12 @@
             <h3>Alta tarea</h3>
             
             
+            <c:if test="${not empty requestScope.msgErrorUsuario}" >
+                <div class="alert alert-danger">
+                    <strong>Mensaje!</strong> ${requestScope.msgErrorUsuario}
+                </div>
+            </c:if>
+            
             <c:if test="${not empty requestScope.msgErrorAlta}" >
                 <div class="alert alert-danger">
                     <strong>Mensaje!</strong> ${requestScope.msgErrorAlta}
@@ -32,6 +38,7 @@
                 
             
             <form action="alta-tarea" method="POST">
+                
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Descripción</span>
@@ -43,6 +50,7 @@
                 </div>
                 
                 <input type="submit" class="btn btn-info btn-block" value="Guardar">
+                
             </form>            
                     
             <%@include file="WEB-INF/vista/pie.jspf" %>   

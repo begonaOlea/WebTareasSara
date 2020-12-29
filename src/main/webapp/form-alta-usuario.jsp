@@ -1,7 +1,7 @@
 <%-- 
-    Document   : form-alta-libro
-    Created on : 18-dic-2020, 9:31:23
-    Author     : user
+    Document   : form-alta-usuario
+    Created on : 23-dic-2020, 10:30:00
+    Author     : Sara
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -32,6 +32,7 @@
                 
             
             <form action="alta-usuario" method="POST">
+                
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Email</span>
@@ -41,6 +42,7 @@
                         ${requestScope.msgErrorEmail}
                     </div>   
                 </div>
+                    
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                     <span class="input-group-text">Password</span>
@@ -50,6 +52,7 @@
                         ${requestScope.msgErrorPassword}
                     </div>   
                 </div>
+                    
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Nombre</span>
@@ -59,6 +62,7 @@
                         ${requestScope.msgErrorNombre}
                     </div>   
                 </div>
+                    
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Apellido</span>
@@ -70,6 +74,7 @@
                 </div>
                 
                 <input type="submit" class="btn btn-info btn-block" value="Guardar">
+                
             </form>            
 
             <%@include file="WEB-INF/vista/pie.jspf" %>   

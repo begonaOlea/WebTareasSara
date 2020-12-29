@@ -5,14 +5,10 @@
  */
 package com.tareas.web;
 
-import com.db.DB;
 import com.tareas.exceptions.DBException;
-import com.tareas.model.Estado;
-import com.tareas.model.Tarea;
 import com.tareas.model.Usuario;
 import com.tareas.services.TareasService;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -56,15 +52,15 @@ public class ModificarEstadoTareaServlet extends HttpServlet {
             valido = false;
         }
       
-        
+        String msgErrorUsuario = null;
         String msgErrorModificar = null;
-        if(valido){// Si los parámetros son correctos creo la tarea y la añado al usuario de la sesion. Si hay error se recoge la excepción. 
+        if(valido){// Si los parámetros son correctos... Si hay error (la tarea no existe) se recoge la excepción. 
             try{
                 HttpSession sesion = req.getSession();
-                if(sesion.getAttribute("usuario") == null){
-                    msgErrorModificar = "El usuario no está en la sesión.";
+                if(sesion.getAttribute("usuario") == null){//Si el usuario no ha iniciado la sesión se crea mensaje de error.
+                    msgErrorUsuario = "El usuario no ha iniciado sesión.";
                     valido = false;
-                }else{
+                }else{//Si el usuario ha iniciado sesión se modifica la tarea para ese usuario.
                     Usuario usuario = (Usuario)sesion.getAttribute("usuario");
                     TareasService ts = new TareasService();
                     ts.modificarEstadoTarea(id, estado, usuario.getEmail());
@@ -81,11 +77,13 @@ public class ModificarEstadoTareaServlet extends HttpServlet {
             //jspAmostrar = "lista-tareas.jsp";
             resp.sendRedirect("tareas");
         }else{//Si los parámetros y el alta no son correctos se muestran los errores correspondientes.
-            jspAmostrar = "tareas";
+            //jspAmostrar = "lista-tareas.jsp";
             req.setAttribute("msgErrorId", msgErrorId);
             req.setAttribute("msgErrorEstado", msgErrorEstado);
-            req.setAttribute("msgErrorAlta", msgErrorModificar);
-            RequestDispatcher rd = req.getRequestDispatcher(jspAmostrar);
+            req.setAttribute("msgErrorUsuario", msgErrorUsuario);
+            req.setAttribute("msgErrorModificar", msgErrorModificar);
+            //RequestDispatcher rd = req.getRequestDispatcher(jspAmostrar);
+            RequestDispatcher rd = req.getRequestDispatcher("tareas");
             rd.forward(req, resp);
         }
         
