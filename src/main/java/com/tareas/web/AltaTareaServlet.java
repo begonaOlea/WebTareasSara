@@ -5,7 +5,7 @@
  */
 package com.tareas.web;
 
-import com.tareas.exceptions.DBException;
+import com.tareas.exceptions.TareasException;
 import com.tareas.model.Usuario;
 import com.tareas.services.TareasService;
 import java.io.IOException;
@@ -50,7 +50,7 @@ public class AltaTareaServlet extends HttpServlet {
                     TareasService ts = new TareasService();
                     ts.darAltaTarea(descripcion, usuario.getEmail());
                 }
-            }catch (DBException ex) {
+            }catch (TareasException ex) {
                 msgErrorAlta = ex.getMessage();
                 valido = false;
             }

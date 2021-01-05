@@ -9,9 +9,9 @@ package com.tareas.exceptions;
  *
  * @author Sara
  */
-public class DBException extends Exception{
+public class UsuariosException extends Exception{
 
-    public DBException(String string) {
+    public UsuariosException(String string) {
         super(string);
     }
     

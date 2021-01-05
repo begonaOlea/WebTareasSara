@@ -5,7 +5,7 @@
  */
 package com.tareas.web;
 
-import com.tareas.exceptions.DBException;
+import com.tareas.exceptions.UsuariosException;
 import com.tareas.model.Usuario;
 import com.tareas.services.UsuariosService;
 import java.io.IOException;
@@ -74,7 +74,7 @@ public class AltaUsuarioServlet extends HttpServlet {
 
                 HttpSession session = req.getSession();
                 session.setAttribute("usuario", usuario);
-            } catch (DBException ex) {
+            } catch (UsuariosException ex) {
                 msgErrorAlta = ex.getMessage();
                 valido = false;
             }

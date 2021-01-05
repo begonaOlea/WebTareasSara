@@ -5,7 +5,8 @@
  */
 package com.db;
 
-import com.tareas.exceptions.DBException;
+import com.tareas.exceptions.TareasException;
+import com.tareas.exceptions.UsuariosException;
 import com.tareas.model.Estado;
 import com.tareas.model.Tarea;
 import com.tareas.model.Usuario;
@@ -163,7 +164,7 @@ public class DB {
                 System.out.println("IN PROGRESS > TO DO");    
                 ts.modificarEstadoTarea(t.getIdTarea(), Estado.TODO.getValor(), u.getEmail());
                 System.out.println(t.toString());
-            } catch (DBException ex) {
+            } catch (TareasException ex) {
                 System.out.println(ex.getMessage());
             }
         }
@@ -180,7 +181,7 @@ public class DB {
                 ts.darAltaTarea("TareaBB", u.getEmail());
                 System.out.println("Añado tarea TareaBB que ya existe (pero el id va a ser diferente)");
                 ts.darAltaTarea("TareaBB", u.getEmail());
-            } catch (DBException ex) {
+            } catch (TareasException ex) {
                 System.out.println(ex.getMessage());
             }
             System.out.println("Tareas TO DO: " + ts.getTareasPorEstado(Estado.TODO.getValor(), u.getEmail()));
@@ -202,7 +203,7 @@ public class DB {
         us.darAltaUsuario(new Usuario("usuario6@email.com","666666","Nombre6","Apellido6"));
         System.out.println("Añado usuario usuario6@email.com que ya existe");
         us.darAltaUsuario(new Usuario("usuario6@email.com","666666","Nombre6","Apellido6"));
-        } catch (DBException ex) {
+        } catch (UsuariosException ex) {
             System.out.println(ex.getMessage());
         }
         System.out.println("LISTA USUARIOS: " + usuarios);

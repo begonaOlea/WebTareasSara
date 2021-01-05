@@ -6,7 +6,7 @@
 package com.tareas.services;
 
 import com.db.DB;
-import com.tareas.exceptions.DBException;
+import com.tareas.exceptions.TareasException;
 import com.tareas.model.Estado;
 import com.tareas.model.Tarea;
 import java.util.Collection;
@@ -25,7 +25,7 @@ public class TareasService {
      * @param email
      * @return tareasUsuarioEstado
      */
-    public static Collection<Tarea> getTareasPorEstado(String estado, String email){
+    public static synchronized Collection<Tarea> getTareasPorEstado(String estado, String email){
                 
         Collection<Tarea> tareasUsuario = DB.getTareasPorUsuario().get(email);
         
@@ -46,7 +46,7 @@ public class TareasService {
      * @param nuevoEstado
      * @param email 
      */
-    public static void modificarEstadoTarea(int idTarea, String nuevoEstado, String email) throws DBException{
+    public static synchronized void modificarEstadoTarea(int idTarea, String nuevoEstado, String email) throws TareasException{
         
         Collection<Tarea> tareasUsuario = DB.getTareasPorUsuario().get(email);
         
@@ -59,7 +59,7 @@ public class TareasService {
         }
         
         if (tarea == null){
-            throw new DBException("La tarea con id " + idTarea + " no existe.");
+            throw new TareasException("La tarea con id " + idTarea + " no existe.");
         }else{
             tarea.setEstado(nuevoEstado);
         }
@@ -67,12 +67,12 @@ public class TareasService {
     }
     
     /**
-     * Obtiene las tareas del usuario indicado en el email y la añade. Si ya estaba no se añade y lanza excepcion. Si no estaba se añade y se incrementa el numero de tareas.
-     * @param tarea
+     * Obtiene las tareas del usuario indicado en el email y la añade.Si ya estaba no se añade y lanza excepcion. Si no estaba se añade y se incrementa el numero de tareas.
+     * @param descripcion
      * @param email
-     * @throws DBException 
+     * @throws TareasException 
      */
-    public static void darAltaTarea(String descripcion, String email) throws DBException{
+    public static synchronized void darAltaTarea(String descripcion, String email) throws TareasException{
         
         Collection<Tarea> tareasUsuario = DB.getTareasPorUsuario().get(email);
 
@@ -80,7 +80,7 @@ public class TareasService {
         
         boolean added = tareasUsuario.add(tarea);
         if(!added){
-            throw new DBException("La tarea ya existe.");
+            throw new TareasException("La tarea ya existe.");
         }else{
             DB.incrementarNumeroTareas();
         }

@@ -5,7 +5,7 @@
  */
 package com.tareas.web;
 
-import com.tareas.exceptions.DBException;
+import com.tareas.exceptions.TareasException;
 import com.tareas.model.Usuario;
 import com.tareas.services.TareasService;
 import java.io.IOException;
@@ -65,7 +65,7 @@ public class ModificarEstadoTareaServlet extends HttpServlet {
                     TareasService ts = new TareasService();
                     ts.modificarEstadoTarea(id, estado, usuario.getEmail());
                 }
-            }catch (DBException ex) {
+            }catch (TareasException ex) {
                 msgErrorModificar = ex.getMessage();
                 valido = false;
             }
