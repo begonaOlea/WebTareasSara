@@ -15,7 +15,7 @@ import java.util.HashSet;
  *
  * @author Sara
  */
-public class UsuariosService {
+public class UsuariosService{
     
     /**
      * Añade el usuario. Si ya estaba no se añade y lanza excepcion. Si no estaba se añade y se crea una lista de tareas vacia para este usuario.
